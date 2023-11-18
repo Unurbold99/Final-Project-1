@@ -37,8 +37,8 @@ input_data = pd.DataFrame({
     'building_floor': [building_floor],
     'apartment_floor': [apartment_floor],
     'number_windows': [num_windows],
-    selected_district: [district_dummies.iloc[0]],
-    selected_garage: [garage_dummies.iloc[0]]
+    'district': [district_dummies.iloc[0]],
+    'garage': [garage_dummies.iloc[0]]
 })
 
 # Make predictions
