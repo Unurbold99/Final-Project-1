@@ -20,31 +20,31 @@ garage_options = original_df['garage'].unique()
 selected_district = st.selectbox('Select District', district_options)
 selected_garage = st.selectbox('Select Garage', garage_options)
 
-# Map the selected categorical values to dummy variables
-district_dummies = pd.get_dummies(original_df['district']).loc[:, selected_district]
-garage_dummies = pd.get_dummies(original_df['garage']).loc[:, selected_garage]
+# Map all unique categorical values to dummy variables
+all_district_dummies = pd.get_dummies(original_df['district'])
+all_garage_dummies = pd.get_dummies(original_df['garage'])
 
-# Numeric inputs (you can customize these based on your features)
-area = st.slider('Area (m2)', min_value=0, max_value=500, value=100)
-age_of_building = st.slider('Age of Building', min_value=0, max_value=50, value=10)
-building_floor = st.slider('Building Floor', min_value=1, max_value=20, value=5)
-apartment_floor = st.slider('Apartment Floor', min_value=1, max_value=20, value=5)
-num_windows = st.slider('Number of Windows', min_value=1, max_value=10, value=5)
-
-# Prepare the input data for prediction
+# Ensure that the input_data has columns for all dummy variables
 input_data = pd.DataFrame({
-    'area_m2': [area],
-    'age_building': [age_of_building],
-    'building_floor': [building_floor],
-    'apartment_floor': [apartment_floor],
-    'number_windows': [num_windows],
-    selected_district: [district_dummies.iloc[0]],
-    selected_garage: [garage_dummies.iloc[0]]
+    'area_m2': [st.slider('Area (m2)', min_value=0, max_value=500, value=100)],
+    'age_building': [st.slider('Age of Building', min_value=0, max_value=50, value=10)],
+    'building_floor': [st.slider('Building Floor', min_value=1, max_value=20, value=5)],
+    'apartment_floor': [st.slider('Apartment Floor', min_value=1, max_value=20, value=5)],
+    'number_windows': [st.slider('Number of Windows', min_value=1, max_value=10, value=5)],
+    **dict.fromkeys(all_district_dummies.columns, 0),
+    **dict.fromkeys(all_garage_dummies.columns, 0)
 })
+
+# Set the value for the selected district and garage
+input_data[selected_district] = 1
+input_data[selected_garage] = 1
 
 # Make predictions
 prediction = model.predict(input_data)
 
-# Display the prediction
+# Display the input_data and prediction
+st.subheader('Input Data for Prediction:')
+st.write(input_data)
+
 st.subheader('Predicted Apartment Price:')
 st.write(prediction[0])
