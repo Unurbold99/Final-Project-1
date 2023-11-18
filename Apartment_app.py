@@ -21,8 +21,8 @@ selected_district = st.selectbox('Select District', district_options)
 selected_garage = st.selectbox('Select Garage', garage_options)
 
 # Map all unique categorical values to dummy variables
-all_district_dummies = pd.get_dummies(original_df['district'])
-all_garage_dummies = pd.get_dummies(original_df['garage'])
+all_district_dummies = pd.get_dummies(original_df['district'], prefix='district')
+all_garage_dummies = pd.get_dummies(original_df['garage'], prefix='garage')
 
 # Ensure that the input_data has columns for all dummy variables
 input_data = pd.DataFrame({
@@ -36,8 +36,8 @@ input_data = pd.DataFrame({
 })
 
 # Set the value for the selected district and garage
-input_data[selected_district] = 1
-input_data[selected_garage] = 1
+input_data[f'district_{selected_district}'] = 1
+input_data[f'garage_{selected_garage}'] = 1
 
 # Make predictions
 prediction = model.predict(input_data)
