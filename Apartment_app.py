@@ -32,11 +32,11 @@ garage_dummies = pd.get_dummies(original_df['garage']).loc[:, selected_garage]
 
 # Prepare the input data for prediction
 input_data = pd.DataFrame({
-    'Area': [area_m2],
-    'Age_of_Building': [age_building],
-    'Building_Floor': [building_floor],
-    'Apartment_Floor': [apartment_floor],
-    'Number_of_Windows': [number_windows],
+    'area_m2': [area],
+    'age_building': [age_of_building],
+    'building_floor': [building_floor],
+    'apartment_floor': [apartment_floor],
+    'number_windows': [num_windows],
     selected_district: [district_dummies.iloc[0]],
     selected_garage: [garage_dummies.iloc[0]]
 })
