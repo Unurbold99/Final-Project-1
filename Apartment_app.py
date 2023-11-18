@@ -10,7 +10,7 @@ st.title('Apartment Price Prediction App')
 
 # Load the original DataFrame with categorical columns
 # This is used to map dummy variables back to the original categorical values
-original_df = pd.read_csv('your_dataset.csv')  # Replace with your actual dataset
+original_df = pd.read_csv('apartment_data.csv')  # Replace with your actual dataset
 
 # Unique values for 'district' and 'garage'
 district_options = original_df['district'].unique()
