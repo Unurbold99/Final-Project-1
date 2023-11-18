@@ -20,23 +20,23 @@ apartment_floor = st.slider('Apartment Floor', min_value=1, max_value=20, value=
 num_windows = st.slider('Number of Windows', min_value=1, max_value=10, value=5)
 
 # Categorical inputs
-district_options = original_df['District'].unique()
+district_options = original_df['district'].unique()
 selected_district = st.selectbox('Select District', district_options)
 
-garage_options = original_df['Garage'].unique()
+garage_options = original_df['garage'].unique()
 selected_garage = st.selectbox('Select Garage', garage_options)
 
 # Map the selected categorical values to dummy variables
-district_dummies = pd.get_dummies(original_df['District']).loc[:, selected_district]
-garage_dummies = pd.get_dummies(original_df['Garage']).loc[:, selected_garage]
+district_dummies = pd.get_dummies(original_df['district']).loc[:, selected_district]
+garage_dummies = pd.get_dummies(original_df['garage']).loc[:, selected_garage]
 
 # Prepare the input data for prediction
 input_data = pd.DataFrame({
-    'Area': [area],
-    'Age_of_Building': [age_of_building],
+    'Area': [area_m2],
+    'Age_of_Building': [age_building],
     'Building_Floor': [building_floor],
     'Apartment_Floor': [apartment_floor],
-    'Number_of_Windows': [num_windows],
+    'Number_of_Windows': [number_windows],
     selected_district: [district_dummies.iloc[0]],
     selected_garage: [garage_dummies.iloc[0]]
 })
