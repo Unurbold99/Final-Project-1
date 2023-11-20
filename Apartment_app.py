@@ -48,3 +48,7 @@ st.write(input_data)
 
 st.subheader('Predicted Apartment Price:')
 st.write(prediction[0])
+
+# It was really hard to come up with a method to turn the dummied variables back into their normal and then back into the get_dummies columns for the model to understand them 
+# This project was was a challenge but I have learned alot from it, basically every step from the beginning is reflected on the next step of the process, every step must be bulletproof
+# I hope to be able to independently create such useful tools in the future and one thing I want to learn more about is scraping techniques as well as methods of efficiency in it.
